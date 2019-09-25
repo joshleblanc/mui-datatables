@@ -17,11 +17,15 @@ import TableResize from './components/TableResize';
 import TableToolbar from './components/TableToolbar';
 import TableToolbarSelect from './components/TableToolbarSelect';
 import textLabels from './textLabels';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 import { buildMap, getCollatorComparator, sortCompare } from './utils';
 
 const defaultTableStyles = theme => ({
   root: {},
-  paper: {},
+  paper: {
+    position: 'relative'
+  },
   tableRoot: {
     outline: 'none',
   },
@@ -141,6 +145,7 @@ class MUIDataTable extends React.Component {
       customToolbarSelect: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
       customFooter: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
       customSearchRender: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+      loading: PropTypes.bool,
       customRowRender: PropTypes.func,
       onRowClick: PropTypes.func,
       onRowsSelect: PropTypes.func,
@@ -285,6 +290,7 @@ class MUIDataTable extends React.Component {
     selectableRowsOnClick: false,
     selectableRowsHeader: true,
     caseSensitive: false,
+    loading: false,
     serverSide: false,
     rowHover: true,
     fixedHeader: true,
@@ -1209,7 +1215,7 @@ class MUIDataTable extends React.Component {
   }
 
   render() {
-    const { classes, className, title } = this.props;
+    const { classes, theme, className, title } = this.props;
     const {
       announceText,
       activeColumn,
@@ -1338,6 +1344,16 @@ class MUIDataTable extends React.Component {
           changeRowsPerPage={this.changeRowsPerPage}
           changePage={this.changePage}
         />
+        {
+          this.options.loading &&
+            <div style={{ position: 'absolute', top: 0, left: 0, height: '100%', width: '100%', zIndex: 110 }}>
+              <div style={{ display: 'table', width: '100%', height: '100%', backgroundColor: fade(theme.palette.background.paper, 0.7) }}>
+                <div style={{ display: 'table-cell', width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }}>
+                  <CircularProgress />
+                </div>
+              </div>
+            </div>
+        }
         <div className={classes.liveAnnounce} aria-live={'polite'}>
           {announceText}
         </div>
@@ -1346,4 +1362,4 @@ class MUIDataTable extends React.Component {
   }
 }
 
-export default withStyles(defaultTableStyles, { name: 'MUIDataTable' })(MUIDataTable);
+export default withStyles(defaultTableStyles, { name: 'MUIDataTable', withTheme: true })(MUIDataTable);
