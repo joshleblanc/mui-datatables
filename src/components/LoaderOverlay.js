@@ -33,7 +33,7 @@ class LoaderOverlay extends React.Component {
     return(
       <div className={classes.baseContainer}>
         <div className={classes.overlay}>
-          <div className={classes.progressContainer}>>
+          <div className={classes.progressContainer}>
             <CircularProgress />
           </div>
         </div>
