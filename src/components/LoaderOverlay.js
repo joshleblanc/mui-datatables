@@ -9,17 +9,13 @@ const styles = theme => ({
     top: 0,
     left: 0,
     zIndex: 110,
-    display: 'table',
+    display: 'flex',
     width: '100%',
     height: '100%',
     backgroundColor: fade(theme.palette.background.paper, 0.7)
   },
   progressContainer: {
-    display: 'table-cell',
-    width: '100%',
-    height: '100%',
-    verticalAlign: 'middle',
-    textAlign: 'center'
+    margin: 'auto'
   }
 })
 
