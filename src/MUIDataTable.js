@@ -1214,7 +1214,7 @@ class MUIDataTable extends React.Component {
   }
 
   render() {
-    const { classes, theme, className, title } = this.props;
+    const { classes, className, title } = this.props;
     const {
       announceText,
       activeColumn,
@@ -1354,4 +1354,4 @@ class MUIDataTable extends React.Component {
   }
 }
 
-export default withStyles(defaultTableStyles, { name: 'MUIDataTable', withTheme: true })(MUIDataTable);
+export default withStyles(defaultTableStyles, { name: 'MUIDataTable' })(MUIDataTable);
