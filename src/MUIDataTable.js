@@ -17,9 +17,8 @@ import TableResize from './components/TableResize';
 import TableToolbar from './components/TableToolbar';
 import TableToolbarSelect from './components/TableToolbarSelect';
 import textLabels from './textLabels';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { fade } from '@material-ui/core/styles/colorManipulator';
 import { buildMap, getCollatorComparator, sortCompare } from './utils';
+import LoaderOverlay from './components/LoaderOverlay';
 
 const defaultTableStyles = theme => ({
   root: {},
@@ -1345,14 +1344,7 @@ class MUIDataTable extends React.Component {
           changePage={this.changePage}
         />
         {
-          this.options.loading &&
-            <div style={{ position: 'absolute', top: 0, left: 0, height: '100%', width: '100%', zIndex: 110 }}>
-              <div style={{ display: 'table', width: '100%', height: '100%', backgroundColor: fade(theme.palette.background.paper, 0.7) }}>
-                <div style={{ display: 'table-cell', width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }}>
-                  <CircularProgress />
-                </div>
-              </div>
-            </div>
+          this.options.loading && <LoaderOverlay />
         }
         <div className={classes.liveAnnounce} aria-live={'polite'}>
           {announceText}
